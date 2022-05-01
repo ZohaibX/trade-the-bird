@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //! .babelrc file is a necessary file for this
 
@@ -13,8 +14,12 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json' , '.css' , '.scss'],
   },
+
+  plugins: [new MiniCssExtractPlugin()],
+
+  mode: 'development',
 
   // tell webpack, to apply babel on every file, it runs through
   module: {
@@ -24,6 +29,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.css$/i,
+        use: ["style-loader" ,  "css-loader" ],
+      }
     ],
   },
 };

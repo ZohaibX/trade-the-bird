@@ -7,6 +7,7 @@ import Routes from './client/routes/routes';
 import renderer from './helpers-for-server/renderer';
 import proxy from 'express-http-proxy';
 import CreateStore from './helpers-for-server/server-redux-store';
+import path from 'path'
 
 const app = express();
 

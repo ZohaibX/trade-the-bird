@@ -1,0 +1,650 @@
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  font-size: 62.5%;
+  font-family: Verdana, sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+  color: #777; }
+  @media only screen and (max-width: 68.75em) {
+    body {
+      font-size: 50%; } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+@keyframes moveInLeft {
+  /* moveInLeft is a variable name -- so can be used anywhere */
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+    /* on the left  */ }
+  80% {
+    transform: translateX(1rem);
+    /* before 100% on main position -- we want it to go 10px further right and then , come back */ }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    /*  at 0 ... it will be at the main position */ } }
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+    /* on the right  */ }
+  80% {
+    transform: translateX(-1rem);
+    /* before 100% on main position -- we want it to go -10px further left and then , come back */ }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    /*  at 0 ... it will be at the main position */ } }
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(10rem);
+    /* on the right  */ }
+  80% {
+    transform: translateY(-1rem);
+    /* before 100% on main position -- we want it to go -10px further left and then , come back */ }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    /*  at 0 ... it will be at the main position */ } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.row {
+  max-width: 114rem;
+  margin: 0 auto !important; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+    @media only screen and (max-width: 56.25em) {
+      .row:not(:last-child) {
+        margin-bottom: 6rem !important; } }
+  @media only screen and (max-width: 56.25em) {
+    .row {
+      max-width: 50rem;
+      padding: 0 3rem; } }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left !important; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem !important; }
+      @media only screen and (max-width: 56.25em) {
+        .row [class^="col-"]:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 6rem; } }
+    @media only screen and (max-width: 56.25em) {
+      .row [class^="col-"] {
+        width: 100% !important; } }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-3 {
+    width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-2-of-4 {
+    width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-4 {
+    width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.container {
+  max-width: 85rem;
+  margin: 8rem auto;
+  background-color: #f4f2f2;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3); }
+  @media only screen and (max-width: 75em) {
+    .container {
+      margin: 0;
+      max-width: 100%;
+      width: 100%; } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.header {
+  height: 5rem;
+  background-color: #fff;
+  border-bottom: 1px solid #f4f2f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  @media (max-width: 37.5em) {
+    .header {
+      flex-wrap: wrap;
+      height: 8rem;
+      align-content: space-around; } }
+
+.logo {
+  height: 3.25rem;
+  margin-left: 2rem; }
+
+.search {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  @media (max-width: 37.5em) {
+    .search {
+      order: 1;
+      flex: 0 0 100%;
+      background-color: #f4f2f2; } }
+  .search__input {
+    font-family: inherit;
+    font-size: .8rem;
+    color: inherit;
+    border: none;
+    padding: .7rem .5rem;
+    padding-left: 2rem;
+    background-color: #f4f2f2;
+    border-radius: 100px;
+    width: 80%;
+    margin-right: -2.5rem;
+    transition: all 0.2s; }
+    .search__input:focus {
+      outline: none;
+      width: 90%;
+      background-color: #f0eeee; }
+    .search__input::-webkit-input-placeholder {
+      font-weight: 100;
+      color: #ccc; }
+  .search__input:focus + .search__button {
+    background-color: #f0eeee; }
+  .search__button {
+    border: none;
+    background-color: #f4f2f2; }
+    .search__button:focus {
+      outline: none; }
+    .search__button:active {
+      transform: translateY(4px); }
+  .search__icon {
+    height: 1rem;
+    width: 1rem;
+    fill: #999; }
+
+.user-nav {
+  align-self: stretch;
+  display: flex;
+  align-items: center; }
+  .user-nav > * {
+    padding: 0 2rem;
+    cursor: pointer;
+    height: 100%; }
+    @media only screen and (max-width: 46.875em) {
+      .user-nav > * {
+        padding: 0 1rem; } }
+  .user-nav > *:hover {
+    background-color: #f4f2f2; }
+  .user-nav__icon-box {
+    display: flex;
+    align-items: center;
+    position: relative; }
+  .user-nav__icon {
+    height: 1.3rem;
+    width: 1.3rem;
+    fill: #777; }
+  .user-nav__notification {
+    font-size: .7rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 50%;
+    background-color: #eb2f64;
+    color: #fff;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .user-nav__user {
+    display: flex;
+    align-items: center; }
+  .user-nav__user-photo {
+    height: 2rem;
+    border-radius: 50%; }
+  .user-nav__user-name {
+    margin-left: 1rem;
+    font-size: .9rem; }
+
+.content {
+  display: flex; }
+  @media only screen and (max-width: 75em) {
+    .content {
+      flex-direction: column; } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.sidebar {
+  background-color: #333;
+  flex: 0 0 18%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.side-nav {
+  font-size: .8rem;
+  list-style: none;
+  margin-top: 3rem;
+  width: 100%; }
+  @media only screen and (max-width: 75em) {
+    .side-nav {
+      display: flex;
+      margin: 0; } }
+  .side-nav__item {
+    position: relative; }
+    .side-nav__item:not(:last-child) {
+      margin-bottom: .5rem; }
+      @media only screen and (max-width: 75em) {
+        .side-nav__item:not(:last-child) {
+          margin-bottom: 0; } }
+    @media only screen and (max-width: 75em) {
+      .side-nav__item {
+        flex: 1; } }
+    .side-nav__item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 3px;
+      background-color: #eb2f64;
+      transform: scale(0);
+      transform-origin: center;
+      transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s; }
+    .side-nav__item:hover::before, .side-nav__item--active::before {
+      transform: scaleY(1);
+      width: 100%; }
+    .side-nav__item:active::before {
+      background-color: #ff3366; }
+  .side-nav__link {
+    color: #faf9f9;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 10; }
+    @media only screen and (max-width: 75em) {
+      .side-nav__link {
+        justify-content: center;
+        padding: 1.2rem; } }
+    @media only screen and (max-width: 46.875em) {
+      .side-nav__link {
+        flex-direction: column;
+        padding: .6rem .2rem; } }
+  .side-nav__icon {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-right: 1rem;
+    fill: currentColor; }
+    @media only screen and (max-width: 46.875em) {
+      .side-nav__icon {
+        margin-right: 0;
+        margin-bottom: .3rem;
+        width: 1rem;
+        height: 1rem; } }
+
+.legal-text {
+  font-size: .6rem;
+  color: #ccc;
+  text-align: center;
+  padding: 2.5rem; }
+  @media only screen and (max-width: 75em) {
+    .legal-text {
+      display: none; } }
+
+.hotel-view {
+  flex: 1; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.gallery {
+  display: flex; }
+  .gallery__photo {
+    width: 100%;
+    display: block; }
+
+.overview {
+  display: flex;
+  border-bottom: 1px solid #f0eeee;
+  align-items: center;
+  backface-visibility: hidden; }
+  .overview__heading {
+    font-size: 1.4rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.7rem 2.2rem;
+    color: #999; }
+    @media only screen and (max-width: 46.875em) {
+      .overview__heading {
+        font-size: .8rem;
+        padding: .3rem 1.5rem; } }
+  .overview__stars {
+    margin-right: auto;
+    display: flex; }
+  .overview__icon-star {
+    width: 1rem;
+    height: 1rem;
+    color: #eb2f64; }
+  .overview__location {
+    display: flex;
+    font-size: .7rem; }
+  .overview__icon-location {
+    width: 1rem;
+    height: 1rem;
+    color: #eb2f64;
+    margin-right: .3rem; }
+  .overview__rating {
+    background-color: #eb2f64;
+    color: #fff;
+    margin-left: 2.2rem;
+    padding: .4rem 1.7rem;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; }
+    @media only screen and (max-width: 46.875em) {
+      .overview__rating {
+        padding: .1rem 1rem; } }
+    .overview__rating-average {
+      font-size: 1.7rem;
+      font-weight: 300; }
+      @media only screen and (max-width: 46.875em) {
+        .overview__rating-average {
+          font-size: 1.2rem; } }
+    .overview__rating-count {
+      font-size: .5rem;
+      text-transform: uppercase; }
+      @media only screen and (max-width: 46.875em) {
+        .overview__rating-count {
+          font-size: .2rem; } }
+
+.button-inline {
+  border: none;
+  color: #eb2f64;
+  font-size: inherit;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .2s;
+  backface-visibility: hidden; }
+  .button-inline span {
+    margin-left: 3px;
+    transition: margin-left .2s; }
+  .button-inline:hover {
+    color: #333; }
+    .button-inline:hover span {
+      margin-left: 8px; }
+  .button-inline:focus {
+    outline: none;
+    animation: pulsate 1s linear; }
+
+@keyframes pulsate {
+  0% {
+    -webkit-transform: scale(1);
+    box-shadow: none; }
+  50% {
+    -webkit-transform: scale(1.1);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25); }
+  100% {
+    -webkit-transform: scale(1);
+    box-shadow: none; } }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.details {
+  font-size: .7rem;
+  display: flex;
+  padding: 3rem;
+  background-color: #faf9f9;
+  border-bottom: 1px solid #f4f2f2; }
+  @media only screen and (max-width: 75em) {
+    .details {
+      padding: 2.2rem; } }
+  @media only screen and (max-width: 46.875em) {
+    .details {
+      flex-direction: column; } }
+
+.description {
+  background-color: #fff;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+  padding: 2.2rem;
+  flex: 0 0 60%;
+  margin-right: 2.8rem; }
+  @media only screen and (max-width: 75em) {
+    .description {
+      padding: 1.5rem;
+      margin-right: 2rem; } }
+  @media only screen and (max-width: 46.875em) {
+    .description {
+      margin-right: 0;
+      margin-bottom: 2rem; } }
+  .description__paragraph:not(:last-of-type) {
+    margin-bottom: 1.2rem; }
+  .description__list {
+    list-style: none;
+    margin: 2.2rem 0;
+    padding: 2.2rem 0;
+    border-top: 1px solid #f4f2f2;
+    border-bottom: 1px solid #f4f2f2;
+    display: flex;
+    flex-wrap: wrap; }
+    .description__list__item {
+      flex: 0 0 50%;
+      margin-bottom: .3rem;
+      display: flex;
+      align-items: center; }
+      .description__list__item__photo {
+        display: inline-block;
+        height: .5rem;
+        width: .5rem;
+        margin-right: .4rem;
+        color: #eb2f64; }
+  .description__recommendation {
+    display: flex;
+    align-items: center; }
+    .description__recommendation__count {
+      margin-right: auto; }
+    @media only screen and (max-width: 75em) {
+      .description__recommendation__friends {
+        display: flex; } }
+    .description__recommendation__friends__photo {
+      height: 2.8rem;
+      width: 2.8rem;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-sizing: content-box; }
+      .description__recommendation__friends__photo:not(:last-child) {
+        margin-right: -.6rem; }
+
+.user-reviews {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.review {
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 2.2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden; }
+  @media only screen and (max-width: 75em) {
+    .review {
+      padding: 1.6rem;
+      margin: 1.2rem; } }
+  .review::before {
+    content: "\201C";
+    line-height: 1;
+    font-family: sans-serif;
+    position: absolute;
+    font-size: 13rem;
+    top: -1.6rem;
+    left: -.6rem;
+    color: #f4f2f2;
+    z-index: 1; }
+  .review__text {
+    margin-bottom: 1.2rem;
+    z-index: 10;
+    position: relative; }
+  .review__user {
+    display: flex;
+    align-items: center; }
+    .review__user__photo {
+      height: 3.7rem;
+      width: 3.7rem;
+      border-radius: 50%;
+      margin-right: 1rem; }
+    .review__user__user-box {
+      margin-right: auto; }
+      .review__user__user-box__username {
+        font-size: .6rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: .2rem; }
+      .review__user__user-box__date {
+        font-size: .5rem;
+        color: #999; }
+    .review__user__rating {
+      color: #eb2f64;
+      font-size: 1.1rem;
+      font-weight: 300; }
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.cta {
+  padding: 2.7rem 0;
+  text-align: center; }
+  .cta__book-now {
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 1.7rem; }
+  @media only screen and (max-width: 75em) {
+    .cta {
+      padding: 2rem 0; } }
+
+.btn {
+  font-size: 1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-radius: 100px;
+  border: none;
+  background-image: linear-gradient(to right, #ff3366, #BA265D);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  backface-visibility: hidden; }
+  .btn__visible {
+    display: inline-block;
+    padding: 1.3rem 6.7rem;
+    height: 100%;
+    width: 100%;
+    transition: all 0.2s; }
+  .btn__invisible {
+    display: inline-block;
+    position: absolute;
+    padding: 1.3rem 0;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: -100%;
+    transition: all 0.2s; }
+  .btn:hover {
+    background-image: linear-gradient(to left, #ff3366, #BA265D); }
+  .btn:hover .btn__visible {
+    transform: translateY(100%); }
+  .btn:hover .btn__invisible {
+    top: 0; }
+  .btn:focus {
+    outline: none;
+    animation: pulsate 1s infinite; }
+
+#h1 {
+  font-family: sans-serif;
+  font-weight: bolder;
+  color: orangered; }
+
+.home {
+  height: 100%;
+  width: 100%;
+  position: relative; }
+
+.home-img {
+  height: 15rem;
+  width: 15rem;
+  top: 4rem; }

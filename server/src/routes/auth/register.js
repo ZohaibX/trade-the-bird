@@ -28,9 +28,15 @@ router.post(
       { id: user.id, email: user.email } , process.env.JWTKEY , {expiresIn: '1h'}
     );
 
-    res.status(201).send({user , userJwt}); // user document is already editted in model
+    //? Storing the token in a cookie -- session object
+    req.session.jwt = userJwt; //  -- thats how we store anything on a cookie --
 
-    // we should send 201 in signUp -- means moving data to db
+    // now this cookie will be automatically send with this route -- as a cookie
+    //? cookies will only show up on https -- so we can use https://ticketing.dev/api/users/signUp
+
+    // we will get a long encrypted string, we will take that string to base64decode.org and decode it and then we will get our jwt
+
+    res.status(201).send(user);
   }
 );
 

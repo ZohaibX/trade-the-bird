@@ -6,9 +6,11 @@ import { fetchCurrentUser } from './Store/actions';
 // any route, that is matched by matchRoutes fn, will be passed to this App
 // This App component will be directly connected to every route and to the components, we use here - like header
 const App = ({ route }) => {
+
   return (
-    <div>
+    <div >
       <Header />
+      <div className="body"></div>
       {renderRoutes(route.routes)}
     </div>
   );

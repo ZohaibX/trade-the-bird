@@ -2,30 +2,37 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const session = require("express-session")
+require("dotenv").config()
+const cookieSession = require('cookie-session');
+const {currentUser} = require('@zbtickets/common');
+const AuthRoutes = require("../routes/auth/service");
+const AdRoutes = require("../routes/ads/service")
 
 // middlewares
 const isAuth = require("../middlewares/auth");
 const error = require("../middlewares/error");
-const {currentUser} = require('@zbtickets/common');
-const AuthRoutes = require("../routes/auth/service");
 
 module.exports = function (app) {
+  app.set('trust proxy', true); // it will accept every kind of traffic, believing it is coming from nginx
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(bodyParser.json());
-  // app.use(session( 
-  //   {secret: 'keyboard cat',
-  //   resave: false,
-  //   saveUninitialized: true,
-  //   cookie: { secure: true }}
-  // ));
   app.use(cors());
-  // app.use(isAuth); // auth middleware
   app.use(error); // it is just a reference of error middleware for error handling
+
+  app.use(
+    cookieSession({
+      signed: false, 
+      secure: process.env.NODE_ENV !== 'test', 
+      //? make it secure when having https  
+      // secure means cookie session will only work on the https connection
+      maxAge: 30 * 24 * 60 * 60 * 1000, // it means 30 days
+      keys: [process.env.SECRET],
+    })
+  );
   
-  
-  app.use(currentUser);
   AuthRoutes(app);
+  // AdRoutes(app)
 
   // Cors for axios
   require("../cors/cors")(app);

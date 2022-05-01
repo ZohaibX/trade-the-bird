@@ -35,8 +35,15 @@ router.post(
       process.env.JWTKEY
     );
 
-    res.status(200).send({existingUser , userJwt}); // user document is already editted in model
-    // we should send 200 in signIn
+    //? Storing the token in a cookie -- session object
+    req.session.jwt = userJwt;
+
+    // now this cookie will be automatically send with this route -- as a cookie
+    //? cookies will only show up on https -- so we can use https://ticketing.dev/api/users/signUp
+
+    // we will get a long encrypted string, we will take that string to base64decode.org and decode it and then we will get our jwt
+
+    res.status(200).send(existingUser);
   }
 );
 

@@ -1,17 +1,15 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
+const currentUser = require('../../middlewares/current-user');
 const { User } = require('./model/model');
 const router = express.Router();
 
 router.get(
   '/api/users/currentUser',
-   auth,
+  currentUser,
   async (req, res) => {
     // currentUser middleware will handle payload extraction from jwt
-    const user = await User.findById(req.userId);
-    if (!user) throw new NotFoundError();
-
-    res.status(200).send({ currentUser: user || null });
+    console.log(req.currentUser);
+    res.status(200).send({ currentUser: req.currentUser || null });
   }
 );
 

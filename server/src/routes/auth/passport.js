@@ -8,14 +8,14 @@ const passport = require("passport");
 
 
 
-//! Cookie-Session -- we are using id in serializing and deserializing, we will send that code in a cookie form
-const cookieSession = require("cookie-session");
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000, // it means 30 days
-    keys: ["secret"],
-  })
-);
+// //! Cookie-Session -- we are using id in serializing and deserializing, we will send that code in a cookie form
+// const cookieSession = require("cookie-session");
+// app.use(
+//   cookieSession({
+//     maxAge: 30 * 24 * 60 * 60 * 1000, // it means 30 days
+//     keys: ["secret"],
+//   })
+// );
 
 app.use(passport.initialize());
 app.use(passport.session())// problem is here
@@ -70,7 +70,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile._json.picture);
       let user;
-      user = await User.findOne({ googleId: profile.id });
+      user = await User.findOne({ fbId: profile.id });
       if (!user) {
         user = new User({
           fbId: profile.id,
