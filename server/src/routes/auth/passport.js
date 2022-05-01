@@ -17,18 +17,16 @@ const passport = require("passport");
 //   })
 // );
 
-app.use(passport.initialize());
-app.use(passport.session())// problem is here
+// app.use(passport.initialize());
+// app.use(passport.session())// problem is here
 
 //! Passport Service
 passport.serializeUser((user, done) => {
-  console.log("user from serialize: ", user);
   done(null, user.id); // user's mongo id from database
 });
 
 passport.deserializeUser(async (id, done) => {
   const user = await User.findById(id);
-  console.log("user from deserial: ", user);
   done(null, user);
 }); // after getting that id, we will translate that into the data
 
@@ -41,7 +39,7 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
+      // console.log("profile: ", profile.emails[0].value);
       let user;
       user = await User.findOne({ googleId: profile.id });
       if (!user) {
@@ -49,6 +47,7 @@ passport.use(
           googleId: profile.id,
           username: profile.displayName,
           picture: profile._json.picture,
+          gmail: profile.emails[0].value
         });
         await user.save();
       }
@@ -68,7 +67,6 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile._json.picture);
       let user;
       user = await User.findOne({ fbId: profile.id });
       if (!user) {
@@ -108,15 +106,11 @@ app.get(
   }
 );
 
-//? Special Routes for both
-app.get("/api/current_user", (req, res) => {
-  console.log(req.user);
-  res.send(req.user); // req.user will automatically be created when user passes through the authentication flow
-});
+// Once having done authentication by google or fb
+// all data will be available to req.user 
 
-app.get("/api/logout", (req, res) => {
-  req.logout();
-  res.redirect("/"); // we don't have this route here , but we have this route in client folder , so it will work here
-});
+
+// Current User Route has been merged in current-user.js file 
+// Signing Out Route has Also been merged in sign-out.js file 
 
 module.exports =  app;

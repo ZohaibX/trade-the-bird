@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema(
     password: String,
     picture: String, 
     googleId: String ,
-    fbId: String 
+    gmail: String, 
+    fbId: String
   },
   // changing the returns
   {

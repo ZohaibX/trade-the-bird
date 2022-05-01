@@ -25,7 +25,7 @@ router.post(
 
     //? Generating a JWT token
     const userJwt = jwt.sign(
-      { id: user.id, email: user.email } , process.env.JWTKEY , {expiresIn: '1h'}
+      { id: user.id, email: user.email , username: user.username } , process.env.JWTKEY , {expiresIn: '1h'}
     );
 
     //? Storing the token in a cookie -- session object

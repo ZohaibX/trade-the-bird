@@ -2,10 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/api/users/signOut', async (req, res) => {
+router.get('/api/users/signOut', async (req, res) => {
   req.session = null;
-
-  res.status(200).send({});
+  req.logout();
+  res.redirect("/"); // change this route 
 });
 
 module.exports = router;

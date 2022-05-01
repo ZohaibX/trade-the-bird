@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session');
 const {currentUser} = require('@zbtickets/common');
 const AuthRoutes = require("../routes/auth/service");
 const AdRoutes = require("../routes/ads/service")
+const passport = require("passport");
 
 // middlewares
 const isAuth = require("../middlewares/auth");
@@ -20,6 +21,7 @@ module.exports = function (app) {
   app.use(cors());
   app.use(error); // it is just a reference of error middleware for error handling
 
+
   app.use(
     cookieSession({
       signed: false, 
@@ -30,6 +32,9 @@ module.exports = function (app) {
       keys: [process.env.SECRET],
     })
   );
+  // for passport  JS
+  app.use(passport.initialize());
+  app.use(passport.session())// problem is here
   
   AuthRoutes(app);
   // AdRoutes(app)
