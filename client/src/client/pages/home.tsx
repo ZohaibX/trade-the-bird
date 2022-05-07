@@ -52,6 +52,10 @@ const Home = (props) => {
 
       <br /><br /><br />
       <Passport/>
+
+      <div className="">
+        <h1>Hello World</h1>
+      </div>
     </div>
   );
 };

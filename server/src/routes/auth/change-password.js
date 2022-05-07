@@ -1,12 +1,12 @@
 const express = require("express")
 const jwt = require('jsonwebtoken');
-const { BadRequestException } = require('@zbtickets/common');
+const { BadRequestException, currentUser } = require('@zbtickets/common');
 const { User } = require('./model/model');
-const { validateAuthInput } = require('./validation/validate');
-const auth = require('../../middlewares/auth');
 const { Password } = require('./password-hashing/hashing');
 const router = express.Router();
 require('dotenv').config(); //? to use dotenv file
+const {sendMail} = require("../../services/mailing/server")
+const currentUserMiddleware = require("../../middlewares/current-user")
 
 // ! Postman must be used in https version
 
@@ -22,24 +22,29 @@ router.post(
 
     password = Math.floor(10000000 + Math.random() * 90000000); // generate random 8 digit numbers
     user.password = JSON.stringify(password);
-
-    const subject = 'Password Change Requested!'
-    const text = `Your new Password is - ${password}`
-
-    // SEND EMAIL HERE 
-
     await user.save()
+
+    // MAILING 
+    const subject = 'Password Change Requested!'
+    const text = `<h2>Hello ${user.username}</h2></br><h4>You have Requested For A New Password - Please Use This Password To Sign In Back To Your Account</h4></br><h4>Your New Password is ${password}</h4></br></br><t>Regards - Trade The Bird</t>`
+
+    try {
+      sendMail([user.email] , subject, text) 
+    } catch (error) {
+      throw new BadRequestError("error coming from sendgrid server")
+    }
+
     
     res.status(200).send(`Update Password Request Invoked! - ${password}`); 
   }
 );
 
-router.post('/api/users/changePassword', auth,  async(req, res) => {
+router.post('/api/users/changePassword', currentUserMiddleware,  async(req, res) => {
 
   const {currentPassword, newPassword} = req.body;
   if(!currentPassword || !newPassword || newPassword.length<8 ) throw new BadRequestException("Provide Valid Password")
 
-  const user = await User.findById(req.userId);
+  const user = await User.findById(req.currentUser.id);
   if (!user) throw new BadRequestException('Invalid Credentials - No Email Found!');
 
   const passwordMatch = await Password.compare(
@@ -50,10 +55,6 @@ router.post('/api/users/changePassword', auth,  async(req, res) => {
 
   user.password = newPassword;
   await user.save()
-
-  const subject = 'Password Change Requested!'
-  const text = `Your new Password is - ${newPassword}`
-  // SEND MAIL HERE -- 
 
   res.status(200).send(`Update Password Request Invoked! - ${newPassword}`); 
   

@@ -6,20 +6,6 @@ const session = require("express-session")
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 
-
-
-// //! Cookie-Session -- we are using id in serializing and deserializing, we will send that code in a cookie form
-// const cookieSession = require("cookie-session");
-// app.use(
-//   cookieSession({
-//     maxAge: 30 * 24 * 60 * 60 * 1000, // it means 30 days
-//     keys: ["secret"],
-//   })
-// );
-
-// app.use(passport.initialize());
-// app.use(passport.session())// problem is here
-
 //! Passport Service
 passport.serializeUser((user, done) => {
   done(null, user.id); // user's mongo id from database

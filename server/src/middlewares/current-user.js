@@ -8,6 +8,7 @@ const currentUser = (
   res,
   next
 ) => {
+
   if (!req.session?.jwt) {
     return next();
   }

@@ -22,6 +22,7 @@ module.exports = function (app) {
   app.use(error); // it is just a reference of error middleware for error handling
 
 
+  // for sessions and passport js 
   app.use(
     cookieSession({
       signed: false, 

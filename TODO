@@ -1,5 +1,2 @@
-CHECK USER'S DATABASE -- WITH FB GOOGLE AUTHENTICATION
+Upload Profile Picture of User's Profile - IN S3 
 
-
-current user data from passport 
-single logout api
