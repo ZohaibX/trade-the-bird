@@ -8,7 +8,6 @@ const useRequest = (url: string, body: {}, method: string) => {
   const [error, setError] = useState('');
 
   const doRequest = async (props: any = {}) => {
-    setError('');
     try {
       if (
         method === 'post' ||
@@ -26,15 +25,13 @@ const useRequest = (url: string, body: {}, method: string) => {
         return data;
       }
     } catch (e) {
-      // console.log(e.response.data);
       if (e.response.data.errors[0])
-        setError(e.response.data.errors[0].message.toUpperCase());
-      else setError(e.response.data.message);
-      return { error: { message: "couldn't make the request" } };
+        return {error: e.response.data.errors[0].message.toUpperCase()};
+      else return {error: e.response.data.message} ;
     }
   };
 
-  return { doRequest, error }; // it is better to be in this format , rather than [doRequest , error]
+  return { doRequest }; // it is better to be in this format , rather than [doRequest , error]
 };
 
 export default useRequest;

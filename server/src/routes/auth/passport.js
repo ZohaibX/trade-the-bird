@@ -2,6 +2,8 @@ const express = require('express');
 const { User } = require('./model/model');
 const app = express();
 const session = require("express-session")
+var mongoose = require('mongoose');
+require('dotenv').config(); //? to use dotenv file
 
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
@@ -26,14 +28,20 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       // console.log("profile: ", profile.emails[0].value);
-      let user;
-      user = await User.findOne({ googleId: profile.id });
+      let user, email = profile.emails[0].value;
+      email = email.toLowerCase();
+
+      user = await User.findOne({ email });
       if (!user) {
+        let role ;
+        if(email === process.env.ADMIN || email === process.env.ADMIN2) role = 'Admin'
+        else role = 'User'
+
         user = new User({
-          googleId: profile.id,
           username: profile.displayName,
           picture: profile._json.picture,
-          gmail: profile.emails[0].value
+          email, 
+          role, 
         });
         await user.save();
       }
@@ -49,15 +57,22 @@ passport.use(
       clientID: process.env.FBID,
       clientSecret: process.env.FBSecret,
       callbackURL: "/auth/facebook/callback",
-      profileFields: ["id", "displayName", "gender", "picture"],
+      profileFields: ["id", "emails", "displayName", "gender", "picture"],
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      let user;
-      user = await User.findOne({ fbId: profile.id });
+      let user, email = profile.emails[0].value;
+      email = email.toLowerCase();
+
+      user = await User.findOne({ email });
       if (!user) {
+        let role ;
+        if(email === process.env.ADMIN || email === process.env.ADMIN2) role = 'Admin'
+        else role = 'User'
+
         user = new User({
-          fbId: profile.id,
+          email ,
+          role ,
           username: profile.displayName,
           picture: profile._json.picture.data.url,
         });
@@ -72,14 +87,14 @@ app.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
-app.get("/auth/facebook", passport.authenticate("facebook")); //  we cannot use scope property here -- so we have this similar property in FB Strategy
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: ['email']})); //  we cannot use scope property here -- so we have this similar property in FB Strategy
 
 // Callback Route for FB
 app.get(
   "/auth/facebook/callback",
   passport.authenticate("facebook", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect("/"); // we don't have this route here , but we have this route in client folder , so it will work here
+    res.redirect(`${process.env.FRONTEND}/`); // we don't have this route here , but we have this route in client folder , so it will work here
   }
 );
 
@@ -88,7 +103,7 @@ app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect("/"); // we don't have this route here , but we have this route in client folder , so it will work here
+    res.redirect(`${process.env.FRONTEND}/`); // we don't have this route here , but we have this route in client folder , so it will work here
   }
 );
 

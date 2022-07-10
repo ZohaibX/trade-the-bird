@@ -2,38 +2,129 @@
 
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Button } from 'react-bootstrap';
+import Axios from 'axios';
+import useRequest from '../../hooks/use-request';
+import googleIcon from '../../images/google-icon.svg';
+import fbIcon from '../../images/facebook-icon.svg';
+
+
+const {Label, Text} = Form;
 
 const SignUp = () => {
+  const [username, setUsername] = React.useState("")
+  const [usernameError, setUsernameError] = React.useState("")
+  const [password, setPassword] = React.useState("")
+  const [email, setEmail] = React.useState("")
+  const [error, setError] = React.useState("")
+
+  // Replace
+  const {doRequest} = useRequest(
+      'http://localhost:5000/api/users/signUp',
+      {username, email, password} ,
+      'post'
+    )
+
   useEffect(() => {
     console.log("Welcome to Sign Up Page")
   }, []);
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
 
   //? This function is for SEO
   const head = () => (
     <Helmet>
       <title>{`Trade - Register`}</title>
-      {/* // this is how we will make our title dynamic */}
-      <meta property='og:title' content='Admins List'></meta>
-      {/* // this title is for SEO -- to identify this page title  */}
-      {/* // we normally have to add 4 required meta tags and we can add more optional meta tags for SEO */}
-      {/* //? https://ogp.me/ */}
     </Helmet>
   );
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    if (!username || !email || !password) return alert("Please Fill in all the Required Fields First!");
+    
+    // Replace
+    if(email.toLowerCase() !== "zohaibbutt045@gmail.com" && email.toLowerCase() !== "tayyabnaseer76@gmail.com"){
+      if(!username.includes("@") && !username.includes("_")) return setUsernameError("Please fulfil Username Requirements!")
+    }
+    let response;
+    response = await doRequest();
+
+    
+    if(response.error) setError(response.error); 
+    else window.location = "/" 
+    
+  }
 
   return (
     <div>
       {head()}
       {/* I can place head() function anywhere, Helmet will automatically put it into head tag */}
-      <h2 className="text-center my-5" style={{fontFamily: "lobster"}}>Sign Up Here.</h2>
+      <h2 className="text-center my-5" style={{fontFamily: "Alfa Slab One", }}>Register Sir.</h2>
+      <Form onSubmit={submit} style = {{ width: "400px", margin: "0 auto"}}>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Control type="text" value={username} 
+          onChange={(e) => {
+            if(e.currentTarget.value.includes("@") || e.currentTarget.value.includes("_")) setUsernameError("")
+            setUsername(e.currentTarget.value)
+          }}
+          placeholder="Your Preferred Username..." />
+          <Form.Text className="text-muted">
+          Your Username must include special character i.e. "_" or "@".
+        </Form.Text>
+        </Form.Group>
+        <Form.Group className="" >
+          {usernameError && <div style={{marginTop: "20px", fontWeight: "bolder", color: "black" , fontFamily: "cursive"}} className="alert alert-primary">{usernameError}</div>}
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Control type="email" value={email} 
+          onChange={(e) => setEmail(e.currentTarget.value)}
+          placeholder="Your Email..." />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Control type="password" value={password}
+          onChange={(e) => setPassword(e.currentTarget.value)} 
+          placeholder="A Good Password Please..." />
+        </Form.Group>
+
+        <br />
+        
+        
+        <div className="d-grid gap-2">
+          <Button 
+          type= "submit"
+          style={{backgroundColor: "#191970", color: "white", textDecoration: "none",height: "50px", fontWeight: "bold"}} 
+          size="lg">
+            Register
+          </Button>
+        </div>
+
+        <Form.Group className="mb-3" >
+          {error && <div style={{marginTop: "20px", fontWeight: "bolder", color: "black" , fontFamily: "cursive"}} className="alert alert-primary">{error}</div>}
+        </Form.Group>
+
+        <div className='d-flex flex-row justify-content-between'>
+          <a href={`http://localhost:5000/auth/google`} className="google-icon d-flex flex-row" 
+          style={{width: "48%" , borderRadius: "3px", textDecoration: "none", margin: "0", 
+              height: "45px", backgroundColor: "#191970"}}>
+            <img src={googleIcon} style={{height:"35px", 
+              marginLeft:"10px", marginTop: "3px"}} alt="" />
+            <h6 style={{  marginLeft:"10px", marginTop: "11px",  
+          fontWeight: "bold" , color: "white"}}>Google SignUp</h6>
+          </a>
+
+          <a href={`http://localhost:5000/auth/facebook`}  className="facebook-icon d-flex flex-row" 
+              style={{width: "50%" , borderRadius: "3px", textDecoration: "none", 
+              height: "45px", backgroundColor: "#191970"}}>
+              <img src={fbIcon} style={{height:"35px", 
+              marginLeft:"10px", marginTop: "3px"}} alt="" />
+              <h6 style={{  marginLeft:"10px", marginTop: "11px",  
+                  fontWeight: "bold" , color: "white"}}>Facebook SignUp</h6>
+          </a>
+        </div>
+
+      </Form>
     </div>
   );
 };

@@ -2,7 +2,41 @@ const mongoose = require('mongoose');
 
 const adSchema = new mongoose.Schema(
   {
-    title: String, description: String, price: Number 
+    title: {
+      type: String, 
+      required: true
+    }, 
+    birdTitle: {
+      type: String,
+      required: true
+    },
+    breedName: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String, 
+      required: true
+    }, 
+    price: {
+      type: Number, 
+      required: true
+    }, 
+    contactNumber: {
+      type: String, 
+      required: true
+    },
+    images: [
+      {type: String}
+    ], 
+    locationDetails: {
+      type: String ,
+      required: true
+    },
+    city: {
+      type: String, 
+      required: true
+    }, 
   },
   // changing the returns
   {

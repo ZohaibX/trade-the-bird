@@ -3,7 +3,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import axios from 'axios';
 import rootReducer from '../reducers/index';
-
 import { createLogger } from 'redux-logger';
 const logger = createLogger();
 
@@ -15,7 +14,7 @@ declare global {
 }
 
 const axiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: `http://localhost:5000/api`,
 });
 // TODO i can assign any baseURL here, and will declare a proxy route.
 // proxy route will be the backend, where i wanna send the data

@@ -1,20 +1,35 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { fetchUsers } from '../Store/actions';
 import { connect } from 'react-redux';
 import Passport from '../components/passport/auth';
+import Axios from 'axios';
+import useRequest from '../hooks/use-request';
+
 
 const Home = (props) => {
+  const [data, setData] = React.useState([])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      // Replace
+      let {data} = await Axios.get(`http://localhost:5000/api/users/currentUser` , 
+      { withCredentials: true });
+      setData(data)
+      return data
+    }
+    
+    fetchData();
+    
+  }, [] )
+
+  console.log(data);
+  
   //! This function is for SEO
   const head = () => (
+    // Replace --- title must be user's title
     <Helmet>
-      <title>{`Home Component`}</title>
-      {/* // this is how we will make our title dynamic */}
-      <meta property='og:title' content='Home'></meta>
-      {/* // this title is for SEO -- to identify this page title  */}
-      {/* // we normally have to add 4 required meta tags and we can add more optional meta tags for SEO */}
-      {/* //? https://ogp.me/ */}
+      <title>{`Home`}</title>
     </Helmet>
   );
 
@@ -37,7 +52,7 @@ const Home = (props) => {
       {head()}
       {/* I can place head() function anywhere, Helmet will automatically put it into head tag */}
       <h1>Im a Home Component </h1>
-      <button onClick={() => console.log('You Pressed Me!')}>
+      <button>
         Press Me - !
       </button>
       <br />
@@ -46,7 +61,7 @@ const Home = (props) => {
       </Link>
       <br />
       <br />
-      <button onClick={fetchFakeAPIOnClick}>fetch data </button>
+      <button>fetch data </button>
       <br />
       {showFakeAPIOnClick()}
 
@@ -65,5 +80,6 @@ function mapStateToProps({ users }) {
 }
 
 export default {
-  component: connect(mapStateToProps, { fetchUsers })(Home), // this styling is for Routes file specially
+  component: connect(mapStateToProps, {  })(Home), // this styling is for Routes file specially
+  // component: connect(mapStateToProps, { fetchUsers })(Home), // this styling is for Routes file specially
 };

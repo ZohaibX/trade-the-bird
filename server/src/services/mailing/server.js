@@ -19,7 +19,6 @@ const msg = {
   subject ,
   html: text
 }
-console.log("hey");
+
 sgmail.send(msg)
-console.log("hey");
 }

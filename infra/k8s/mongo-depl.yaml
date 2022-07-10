@@ -18,7 +18,7 @@ spec:
             claimName: server-pvc
       containers:
         - name: server-mongo
-          image: mongo
+          image: mongo:latest
           volumeMounts:
             - name: mongo-storage
               mountPath: /data/db #!! this path must be same for mongodb

@@ -5,25 +5,25 @@ function Passport(props) {
   const [user, setUser] = React.useState(null)
   React.useEffect(() => {
     const getUser = async () => {
-      let User = await axios.get("http://localhost:5000/api/users/currentUser")
-      setUser(User)
+      let {data} = await axios.get(`http://localhost:5000/api/users/currentUser`)
+      setUser(data)
     }
     getUser()
     
   }, [] )
   //! whenever we go to the main page -- redux will run and get current user from fb or google and will get their data
 
-  console.log("Current User Is: ", user);
+  console.log("Current User of Passport is: ", user);
   
   return (
     <div className="App">
       Passport App
       <br />
-      <a href="http://localhost:5000/auth/google"> Sign In By Google </a>
+      <a href={`http://localhost:5000/auth/google`}> Sign In By Google </a>
       <br />
-      <a href="http://localhost:5000/auth/facebook"> Sign In By Facebook </a>
+      <a href={`http://localhost:5000/auth/facebook`}> Sign In By Facebook </a>
       <br />
-      <a href="http://localhost:5000/api/users/signOut">Logout </a>
+      <a href={`http://localhost:5000/api/users/signOut`}>Logout </a>
       <br />
     </div>
   );

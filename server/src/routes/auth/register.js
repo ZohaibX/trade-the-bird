@@ -11,7 +11,8 @@ require('dotenv').config(); //? to use dotenv file
 router.post(
   '/api/users/signUp',
   async (req, res ) => {
-    const { username, email, password } = req.body;
+    let { username, email, password } = req.body;
+    email = email.toLowerCase();
 
     const error = validateAuthInput({ username, email, password });
     if (error) throw new BadRequestException(error);
@@ -19,13 +20,22 @@ router.post(
     const existingUser = await User.findOne({ email });
     if (existingUser) throw new BadRequestException('Email is already in use.');
 
+    let role;
+    if(email === process.env.ADMIN || email === process.env.ADMIN2) role = 'Admin'
+    else role = 'User'
+
     //? password hashing is in service file and is executed in mongoose model file
-    const user = User.build({ username, email, password });
+    const user = User.build({ username, email, password, role });
     await user.save();
 
     //? Generating a JWT token
     const userJwt = jwt.sign(
-      { id: user.id, email: user.email , username: user.username } , process.env.JWTKEY , {expiresIn: '1h'}
+      { id: user.id, 
+        email: user.email , 
+        username: user.username , 
+        role: user.role } , 
+        process.env.JWTKEY , 
+        {expiresIn: '1h'}
     );
 
     //? Storing the token in a cookie -- session object

@@ -9,6 +9,7 @@ import SignIn from '../pages/auth/sign-in';
 import ChangePassword from '../pages/auth/change-password';
 import ForgotPassword from '../pages/auth/forgot-password';
 import imageUpload from '../pages/image-upload';
+import PostAd from '../pages/ads/post-ad';
 
 export default [
   {
@@ -18,11 +19,15 @@ export default [
       { path: '/users', ...UsersList },
       { path: '/admins', ...Admins },
       { path: '/test', ...Test },
-      {path: '/register', ...SignUp},
-      {path: '/sign-in', ...SignIn},
-      {path: '/change-password', ...ChangePassword},
-      {path: '/forgot-password', ...ForgotPassword},
-      {path: '/image-upload', ...imageUpload},
+      { path: '/register', ...SignUp },
+      { path: '/sign-in', ...SignIn },
+
+      // Replace -- add current user id in params
+      { path: '/post-ad', ...PostAd },
+
+      { path: '/change-password', ...ChangePassword },
+      { path: '/forgot-password', ...ForgotPassword },
+      { path: '/image-upload', ...imageUpload },
       { ...NotFound }, // this is how we use not-found page -- by not providing path
     ],
   },

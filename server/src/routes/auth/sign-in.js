@@ -12,7 +12,8 @@ const router = express.Router();
 router.post(
   '/api/users/signIn',
   async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    email = email.toLowerCase();
 
     const error = validateAuthInput({ email, password });
     if (error) throw new BadRequestException(error);
@@ -21,6 +22,8 @@ router.post(
     const existingUser = await User.findOne({ email });
     if (!existingUser) throw new BadRequestException('Invalid Credentials');
     //? using next(error) - error will directly go to the error handling middleware and catch the error and we can send valid responses
+
+    if(existingUser.blocked) throw new BadRequestException("Account is blocked by administration")
 
     const passwordMatch = await Password.compare(
       existingUser.password,
@@ -31,8 +34,12 @@ router.post(
 
     //? Generating a JWT token
     const userJwt = jwt.sign(
-      { id: existingUser.id, email: existingUser.email, username: existingUser.username },
-      process.env.JWTKEY
+      { id: existingUser.id,
+        email: existingUser.email, 
+        username: existingUser.username, 
+        role:existingUser.role },
+        process.env.JWTKEY , 
+        {expiresIn: '1h'}
     );
 
     //? Storing the token in a cookie -- session object

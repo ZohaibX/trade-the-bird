@@ -5,11 +5,16 @@ const userSchema = new mongoose.Schema(
   {
     username: String,
     email: String,
+    role: {
+      type: String, 
+      default: "User"
+    }, 
     password: String,
-    picture: String, 
-    googleId: String ,
-    gmail: String, 
-    fbId: String
+    blocked: {
+      type: Boolean ,
+      default: false
+    },
+    picture: String,
   },
   // changing the returns
   {
