@@ -1,17 +1,17 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const session = require("express-session")
-require("dotenv").config()
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+require('dotenv').config();
 const cookieSession = require('cookie-session');
-const {currentUser} = require('@zbtickets/common');
-const AuthRoutes = require("../routes/auth/service");
-const AdRoutes = require("../routes/ads/service")
-const passport = require("passport");
+const { currentUser } = require('@zbtickets/common');
+const AuthRoutes = require('../routes/auth/service');
+const AdRoutes = require('../routes/ads/service');
+const passport = require('passport');
 
 // middlewares
-const isAuth = require("../middlewares/auth");
-const error = require("../middlewares/error");
+const isAuth = require('../middlewares/auth');
+const error = require('../middlewares/error');
 
 module.exports = function (app) {
   app.set('trust proxy', true); // it will accept every kind of traffic, believing it is coming from nginx
@@ -21,13 +21,12 @@ module.exports = function (app) {
   app.use(cors());
   app.use(error); // it is just a reference of error middleware for error handling
 
-
-  // for sessions and passport js 
+  // for sessions and passport js
   app.use(
     cookieSession({
-      signed: false, 
-      secure: process.env.NODE_ENV !== 'test', 
-      //? make it secure when having https  
+      signed: false,
+      secure: process.env.NODE_ENV !== 'test',
+      //? make it secure when having https
       // secure means cookie session will only work on the https connection
       maxAge: 30 * 24 * 60 * 60 * 1000, // it means 30 days
       keys: [process.env.SECRET],
@@ -35,13 +34,13 @@ module.exports = function (app) {
   );
   // for passport  JS
   app.use(passport.initialize());
-  app.use(passport.session())// problem is here
-  
+  app.use(passport.session()); // problem is here
+
   AuthRoutes(app);
-  // AdRoutes(app)
+  AdRoutes(app);
 
   // Cors for axios
-  require("../cors/cors")(app);
+  require('../cors/cors')(app);
 
   // // GQL
   // require("../graphql/service/service")(app);
@@ -52,6 +51,4 @@ module.exports = function (app) {
   // // Redis
   // require("../services/cache");
   // we must run a redis server to work with it
-
-
 };

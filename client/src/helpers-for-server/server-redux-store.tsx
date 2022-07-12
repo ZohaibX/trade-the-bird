@@ -4,13 +4,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import axios from 'axios';
 import rootReducer from './../client/Store/reducers/index';
-
 import { createLogger } from 'redux-logger';
+import { keys } from '../config/keys';
 const logger = createLogger();
 
 const CreateStore = (req) => {
   const serverAxiosInstance = axios.create({
-    baseURL: `http://localhost:5000/api`,
+    // Replace
+    baseURL: `${keys.BACKEND}/api`,
     headers: { cookie: req.get('cookie') || '' }, // important -- we may need to handle 'cookie', if there is some difference in casing -- like 'Cookie' or so
   });
   //? server side proxy instance is not gonna go into the proxy setup in index.tsx

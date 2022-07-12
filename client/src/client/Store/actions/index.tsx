@@ -19,21 +19,17 @@ export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 //? async requests - way
 export const fetchCurrentUser = () => async (dispatch, getState, api) => {
   //? api: axiosInstance , we sent this in the store . details are there
-
-  const { data } = await api.get('/users/currentUser');
-  console.log("data from actions: ", data );
-  dispatch({ type: FETCH_CURRENT_USER, payload: data });
+  const {data} = await api.get('/users/currentUser');
+  dispatch({ type: FETCH_CURRENT_USER, payload: data.currentUser });
 };
 
-// export const FETCH_ADMINS = 'FETCH_ADMINS';
-
-//? async requests - way
-// export const fetchAdmins = () => async (dispatch, getState, api) => {
-//   //? api: axiosInstance , we sent this in the store . details are there
-
-//   const { data } = await api.get('/admins');
-//   dispatch({ type: FETCH_ADMINS, payload: data });
-// };
+export const FETCH_ALL_ADS = 'FETCH_ALL_ADS';
+// ? async requests - way
+export const fetchAllAds = () => async (dispatch, getState, api) => {
+  //? api: axiosInstance , we sent this in the store . details are there
+  const { data } = await api.get('/ads/get-all-ads');
+  dispatch({ type: FETCH_ALL_ADS, payload: data });
+};
 
 //? sync  action
 // Setting search text in a state

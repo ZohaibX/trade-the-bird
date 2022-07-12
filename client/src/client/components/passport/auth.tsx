@@ -1,32 +1,33 @@
-import React from "react";
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
+import { keys } from '../../../config/keys';
 
 function Passport(props) {
-  const [user, setUser] = React.useState(null)
+  const [user, setUser] = React.useState(null);
   React.useEffect(() => {
     const getUser = async () => {
-      let {data} = await axios.get(`http://localhost:5000/api/users/currentUser`)
-      setUser(data)
-    }
-    getUser()
-    
-  }, [] )
+      let { data } = await axios.get(`${keys.BACKEND}/api/users/currentUser`);
+      setUser(data);
+    };
+    getUser();
+  }, []);
   //! whenever we go to the main page -- redux will run and get current user from fb or google and will get their data
 
-  console.log("Current User of Passport is: ", user);
-  
+  console.log('Current User of Passport is: ', user);
+
+  // Replaces
   return (
     <div className="App">
       Passport App
       <br />
-      <a href={`http://localhost:5000/auth/google`}> Sign In By Google </a>
+      <a href={`${keys.BACKEND}/auth/google`}> Sign In By Google </a>
       <br />
-      <a href={`http://localhost:5000/auth/facebook`}> Sign In By Facebook </a>
+      <a href={`${keys.BACKEND}/auth/facebook`}> Sign In By Facebook </a>
       <br />
-      <a href={`http://localhost:5000/api/users/signOut`}>Logout </a>
+      <a href={`${keys.BACKEND}/api/users/signOut`}>Logout </a>
       <br />
     </div>
   );
 }
 
-export default (Passport);
+export default Passport;

@@ -2,41 +2,39 @@ const mongoose = require('mongoose');
 
 const adSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
     title: {
-      type: String, 
-      required: true
-    }, 
+      type: String,
+    },
     birdTitle: {
       type: String,
-      required: true
     },
     breedName: {
       type: String,
-      required: true
     },
     description: {
-      type: String, 
-      required: true
-    }, 
+      type: String,
+    },
     price: {
-      type: Number, 
-      required: true
-    }, 
+      type: Number,
+    },
     contactNumber: {
-      type: String, 
-      required: true
+      type: String,
     },
     images: [
-      {type: String}
-    ], 
+      {
+        type: String,
+      },
+    ],
     locationDetails: {
-      type: String ,
-      required: true
+      type: String,
     },
     city: {
-      type: String, 
-      required: true
-    }, 
+      type: String,
+    },
   },
   // changing the returns
   {
@@ -58,4 +56,4 @@ adSchema.statics.build = (attrs) => {
 
 const Ad = mongoose.model('Ad', adSchema);
 
-module.exports.Ad  = Ad
+module.exports = Ad;

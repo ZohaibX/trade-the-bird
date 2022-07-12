@@ -2,29 +2,20 @@ const { NotAuthorizedError } = require('@zbtickets/common');
 
 const jwt = require('jsonwebtoken');
 
-
-const currentUser = (
-  req,
-  res,
-  next
-) => {
-
+const currentUser = (req, res, next) => {
   if (!req.session?.jwt) {
     return next();
   }
 
   try {
-    const payload = jwt.verify(
-      req.session.jwt,
-      process.env.JWTKEY
-    ) ;
+    const payload = jwt.verify(req.session.jwt, process.env.JWTKEY);
     req.currentUser = payload;
   } catch (err) {
-    NotAuthorizedError("Not Authorized!")
+    NotAuthorizedError('Not Authorized!');
   }
 
   console.log(req.currentUser);
   next();
 };
 
-module.exports = currentUser
+module.exports = currentUser;

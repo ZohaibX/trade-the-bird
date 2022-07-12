@@ -1,1 +1,2 @@
 remove node-sass when in docker work
+"node-sass": "7.0.1",

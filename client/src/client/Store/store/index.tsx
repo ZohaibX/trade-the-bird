@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import axios from 'axios';
 import rootReducer from '../reducers/index';
 import { createLogger } from 'redux-logger';
+import { keys } from '../../../config/keys';
 const logger = createLogger();
 
 // God way of adding some property to some built-in method
@@ -14,7 +15,8 @@ declare global {
 }
 
 const axiosInstance = axios.create({
-  baseURL: `http://localhost:5000/api`,
+  // Replace
+  baseURL: `${keys.BACKEND}/api`,
 });
 // TODO i can assign any baseURL here, and will declare a proxy route.
 // proxy route will be the backend, where i wanna send the data

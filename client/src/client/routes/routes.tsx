@@ -10,6 +10,8 @@ import ChangePassword from '../pages/auth/change-password';
 import ForgotPassword from '../pages/auth/forgot-password';
 import imageUpload from '../pages/image-upload';
 import PostAd from '../pages/ads/post-ad';
+import AdDetails from '../pages/ads/ad-details';
+import AdDetailsX from '../pages/ads/ad-details-x';
 
 export default [
   {
@@ -21,6 +23,7 @@ export default [
       { path: '/test', ...Test },
       { path: '/register', ...SignUp },
       { path: '/sign-in', ...SignIn },
+      { path: '/:adId', ...AdDetails },
 
       // Replace -- add current user id in params
       { path: '/post-ad', ...PostAd },

@@ -7,13 +7,15 @@ import Routes from './client/routes/routes';
 import renderer from './helpers-for-server/renderer';
 import proxy from 'express-http-proxy';
 import CreateStore from './helpers-for-server/server-redux-store';
-import path from 'path'
+import path from 'path';
+import { keys } from './config/keys';
 
 const app = express();
 
 app.use(
   '/api',
-  proxy(`http://localhost:5000/api`, {
+  // Replace
+  proxy(`${keys.BACKEND}/api`, {
     proxyReqOptDecorator(opts) {
       opts.headers['x-forwarded-host'] = 'localhost:3000';
       return opts;
@@ -57,6 +59,6 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.listen(keys.PORT, () => {
   console.log('Server Side of SSR running on port -- 3000');
 });

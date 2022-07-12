@@ -2,8 +2,11 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
 import img from '../images/logo-color.svg';
+import { keys } from '../../config/keys';
 
-const Header = (props) => {
+const Header = ({ currentUser }) => {
+  console.log(currentUser);
+
   return (
     <Navbar
       collapseOnSelect
@@ -23,8 +26,9 @@ const Header = (props) => {
               textDecoration: 'none',
             }}
           >
+            {/* REPLACES */}
             <img
-              src={`http://localhost:3000/logo-color.svg`}
+              src={`${keys.ROUTE}/logo-color.svg`}
               style={{ height: '100px', marginTop: '-5px' }}
               alt=""
             />
@@ -67,43 +71,86 @@ const Header = (props) => {
               Query Section
             </Nav.Link>
           </Nav>
-          <Nav>
-            <Link
-              to="/register"
-              className="my-auto mx-2"
-              style={{
-                fontStyle: 'none',
-                borderRadius: '10px',
-                paddingLeft: '10px',
-                paddingRight: '10px',
-                paddingTop: '10px',
-                paddingBottom: '10px',
-                boxShadow: '5px 5px black',
-                color: 'white',
-                textDecoration: 'none',
-              }}
-            >
-              Register
-            </Link>
-            <Link
-              to="/sign-in"
-              className="my-auto mx-2"
-              style={{
-                fontStyle: 'none',
-                borderRadius: '10px',
-                paddingLeft: '10px',
-                paddingRight: '10px',
-                paddingTop: '10px',
-                paddingBottom: '10px',
-                boxShadow: '5px 5px black',
-                color: 'white',
-                textDecoration: 'none',
-              }}
-              eventKey={2}
-            >
-              Sign In
-            </Link>
-          </Nav>
+
+          {!currentUser && (
+            <Nav>
+              <Link
+                to="/register"
+                className="my-auto mx-2"
+                style={{
+                  fontStyle: 'none',
+                  borderRadius: '10px',
+                  paddingLeft: '10px',
+                  paddingRight: '10px',
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  boxShadow: '5px 5px black',
+                  color: 'white',
+                  textDecoration: 'none',
+                }}
+              >
+                Register
+              </Link>
+              <Link
+                to="/sign-in"
+                className="my-auto mx-2"
+                style={{
+                  fontStyle: 'none',
+                  borderRadius: '10px',
+                  paddingLeft: '10px',
+                  paddingRight: '10px',
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  boxShadow: '5px 5px black',
+                  color: 'white',
+                  textDecoration: 'none',
+                }}
+                eventKey={2}
+              >
+                Sign In
+              </Link>
+            </Nav>
+          )}
+
+          {currentUser && (
+            <Nav>
+              <Link
+                to="/"
+                className="my-auto mx-2"
+                style={{
+                  fontStyle: 'none',
+                  borderRadius: '10px',
+                  paddingLeft: '10px',
+                  paddingRight: '10px',
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  boxShadow: '5px 5px black',
+                  color: 'white',
+                  textDecoration: 'none',
+                }}
+              >
+                {currentUser.username}
+              </Link>
+              <a
+                href={`${keys.BACKEND}/api/users/signOut`}
+                className="my-auto mx-2"
+                style={{
+                  fontStyle: 'none',
+                  borderRadius: '10px',
+                  paddingLeft: '10px',
+                  paddingRight: '10px',
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                  boxShadow: '5px 5px black',
+                  color: 'white',
+                  textDecoration: 'none',
+                }}
+                eventKey={2}
+              >
+                Logout
+              </a>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
