@@ -1,15 +1,16 @@
-@import "./abstract/_variables.scss";
-@import "./abstract/_base.scss";
-@import "./abstract/_mixins.scss";
-@import "./abstract/animations.scss";
+@import './abstract/_variables.scss';
+@import './abstract/_base.scss';
+@import './abstract/_mixins.scss';
+@import './abstract/animations.scss';
 
 //                                GridTest
 
-@import "layouts/grid-test";
+@import 'layouts/grid-test';
 
-//                               Layout
+//
 
-// @import "layouts/layout.scss";
-
-// HOME 
-// @import "./layouts/Home/index.scss"
+@import 'layouts/header.scss';
+@import 'layouts/home.scss';
+@import 'layouts/post-ad.scss';
+@import 'layouts/ad-details.scss';
+@import 'layouts/update-ad.scss';

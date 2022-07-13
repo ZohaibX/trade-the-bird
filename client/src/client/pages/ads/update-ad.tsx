@@ -11,10 +11,9 @@ import axios from 'axios';
 import useRequest from '../../hooks/use-request';
 import Alert from '@mui/material/Alert';
 import { keys } from '../../../config/keys';
-import RequireAuth from '../../components/hocs/require-auth';
-import { Helmet } from 'react-helmet';
+import Axios from 'axios';
 
-function PostAd() {
+function UpdateAd(props) {
   const [breedName, setBreedName] = React.useState('');
   const [birdName, setBirdName] = React.useState('');
   const [adTitle, setAdTitle] = React.useState('');
@@ -23,13 +22,28 @@ function PostAd() {
   const [contact, setContact] = React.useState('');
   const [locationDetails, setLocationDetails] = React.useState('');
   const [city, setCity] = React.useState('');
-  const [files, setFiles] = React.useState([]);
   const [error, setError] = React.useState('');
+
+  const id = atob(props.match.params.id);
+
+  React.useEffect(() => {
+    const fetchAdDetails = async () => {
+      const { data } = await Axios.get(`${keys.BACKEND}/api/ads/get-ad/${id}`);
+      setBreedName(data.breedName);
+      setBirdName(data.birdTitle);
+      setAdTitle(data.title);
+      setAdDescription(data.description);
+      setAdPrice(data.price);
+      setContact(data.contactNumber);
+      setLocationDetails(data.locationDetails);
+      setCity(data.city);
+    };
+    fetchAdDetails();
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
     if (
-      !files.length ||
       !birdName ||
       !breedName ||
       !adTitle ||
@@ -41,28 +55,11 @@ function PostAd() {
     )
       return alert('fill all the requirements');
 
-    // get url from this route - when all the app is single
-    let urls = [];
-    for (let i = 0; i < files.length; i++) {
-      const { data } = await axios.get(
-        `${keys.BACKEND}/api/ads/ad-upload/get-url/`
-      );
-      urls = [...urls, data];
-    }
-
-    // now update picture in that url
-    for (let i = 0; i < files.length; i++) {
-      const response = await axios.put(urls[i].url, files[i], {
-        headers: { 'Content-Type': files[i].type },
-      });
-    }
-
     // here, update the picture url in user's data
     let response;
 
     try {
-      response = await axios.post(`${keys.BACKEND}/api/ads/ad-upload/`, {
-        images: urls,
+      await axios.put(`${keys.BACKEND}/api/ads/update-ad/${id}`, {
         birdName,
         breedName,
         adTitle,
@@ -80,22 +77,13 @@ function PostAd() {
     }
   };
 
-  //! This function is for SEO
-  const head = () => (
-    // Replace --- title must be user's title
-    <Helmet>
-      <title>{`Post AD`}</title>
-    </Helmet>
-  );
-
   return (
     <div className="" style={{ width: '100%', margin: '0 auto' }}>
-      {head()}
       <h2 className="text-center my-5" style={{ fontFamily: 'Alfa Slab One' }}>
-        Upload an Ad Sir.
+        Update Your AD Sir.
       </h2>
 
-      <Form onSubmit={submit} className="form-post">
+      <Form className="form-update" onSubmit={submit}>
         <div className="ad-title mb-2">
           <Text
             label="Give Your Ad - A Promising Title ... "
@@ -104,7 +92,7 @@ function PostAd() {
           />
         </div>
 
-        <div className="" id="search-box-post">
+        <div className="" id="search-box-post" style={{ marginTop: '10px' }}>
           <BirdNameSelect
             label="Bird Name"
             value={birdName}
@@ -127,7 +115,7 @@ function PostAd() {
         </div>
 
         <div className="post-flex-1" style={{ marginTop: '20px' }}>
-          <div className="price mb-3" style={{ marginTop: '-20px' }}>
+          <div className="price" style={{ marginTop: '-20px' }}>
             <Text
               label="Price (PKR) ..."
               value={adPrice}
@@ -135,17 +123,9 @@ function PostAd() {
               type="Number"
             />{' '}
           </div>
-
-          <div className="upload">
-            <UploadButton files={files} setFiles={setFiles} />
-            <br />
-            <Form.Text className="text-muted">
-              Please select the only images - which are clearly recognizable.
-            </Form.Text>
-          </div>
         </div>
 
-        <div className="" id="location-box-post">
+        <div className="" id="location-box-post" style={{ marginTop: '20px' }}>
           <div className="contact-number">
             <Text
               label="Contact Number ..."
@@ -154,7 +134,7 @@ function PostAd() {
             />
           </div>
 
-          <div className="city">
+          <div className="City">
             <NormalSelect label="City" value={city} setValue={setCity} />
           </div>
 
@@ -196,6 +176,5 @@ function PostAd() {
 }
 
 export default {
-  component: RequireAuth(PostAd),
-  // component: PostAd,
+  component: UpdateAd,
 };

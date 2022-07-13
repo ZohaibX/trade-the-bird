@@ -11,7 +11,9 @@ import ForgotPassword from '../pages/auth/forgot-password';
 import imageUpload from '../pages/image-upload';
 import PostAd from '../pages/ads/post-ad';
 import AdDetails from '../pages/ads/ad-details';
-import AdDetailsX from '../pages/ads/ad-details-x';
+import UpdateAd from '../pages/ads/update-ad';
+import myAds from '../pages/ads/my-ads';
+import profile from '../pages/profile';
 
 export default [
   {
@@ -23,7 +25,9 @@ export default [
       { path: '/test', ...Test },
       { path: '/register', ...SignUp },
       { path: '/sign-in', ...SignIn },
-      { path: '/:adId', ...AdDetails },
+      { path: `/ad-details-:id-:userId-details-x`, ...AdDetails },
+      { path: `/update-ad-details-:id-details-x`, ...UpdateAd },
+      { path: `/get-my-ads`, ...myAds },
 
       // Replace -- add current user id in params
       { path: '/post-ad', ...PostAd },

@@ -26,6 +26,7 @@ export default function NormalSelect({ label, value, setValue }) {
   return (
     <div>
       <Autocomplete
+        className="post-select"
         style={{ width: '200px', marginTop: '6px' }}
         {...defaultProps}
         id="disable-close-on-select"

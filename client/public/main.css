@@ -9,17 +9,21 @@ big-desktop -- 1800px +
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 body {
   font-size: 62.5%;
   font-family: 'Bebas Neue', cursive;
   font-weight: 400;
   min-height: 100vh;
-  color: #777; }
-  @media only screen and (max-width: 68.75em) {
-    body {
-      font-size: 50%; } }
+  color: #777;
+}
+@media only screen and (max-width: 68.75em) {
+  body {
+    font-size: 50%;
+  }
+}
 
 /*
 $Breakpoint argument choices
@@ -34,40 +38,52 @@ big-desktop -- 1800px +
   0% {
     opacity: 0;
     transform: translateX(-10rem);
-    /* on the left  */ }
+    /* on the left  */
+  }
   80% {
     transform: translateX(1rem);
-    /* before 100% on main position -- we want it to go 10px further right and then , come back */ }
+    /* before 100% on main position -- we want it to go 10px further right and then , come back */
+  }
   100% {
     opacity: 1;
     transform: translateX(0);
-    /*  at 0 ... it will be at the main position */ } }
+    /*  at 0 ... it will be at the main position */
+  }
+}
 
 @keyframes moveInRight {
   0% {
     opacity: 0;
     transform: translateX(10rem);
-    /* on the right  */ }
+    /* on the right  */
+  }
   80% {
     transform: translateX(-1rem);
-    /* before 100% on main position -- we want it to go -10px further left and then , come back */ }
+    /* before 100% on main position -- we want it to go -10px further left and then , come back */
+  }
   100% {
     opacity: 1;
     transform: translateX(0);
-    /*  at 0 ... it will be at the main position */ } }
+    /*  at 0 ... it will be at the main position */
+  }
+}
 
 @keyframes moveInBottom {
   0% {
     opacity: 0;
     transform: translateY(10rem);
-    /* on the right  */ }
+    /* on the right  */
+  }
   80% {
     transform: translateY(-1rem);
-    /* before 100% on main position -- we want it to go -10px further left and then , come back */ }
+    /* before 100% on main position -- we want it to go -10px further left and then , come back */
+  }
   100% {
     opacity: 1;
     transform: translateY(0);
-    /*  at 0 ... it will be at the main position */ } }
+    /*  at 0 ... it will be at the main position */
+  }
+}
 
 /*
 $Breakpoint argument choices
@@ -79,40 +95,366 @@ big-desktop -- 1800px +
 */
 .row {
   max-width: 114rem;
-  margin: 0 auto !important; }
+  margin: 0 auto !important;
+}
+.row:not(:last-child) {
+  margin-bottom: 8rem;
+}
+@media only screen and (max-width: 56.25em) {
   .row:not(:last-child) {
-    margin-bottom: 8rem; }
-    @media only screen and (max-width: 56.25em) {
-      .row:not(:last-child) {
-        margin-bottom: 6rem !important; } }
-  @media only screen and (max-width: 56.25em) {
-    .row {
-      max-width: 50rem;
-      padding: 0 3rem; } }
-  .row::after {
-    content: "";
-    display: table;
-    clear: both; }
-  .row [class^="col-"] {
-    float: left !important; }
-    .row [class^="col-"]:not(:last-child) {
-      margin-right: 6rem !important; }
-      @media only screen and (max-width: 56.25em) {
-        .row [class^="col-"]:not(:last-child) {
-          margin-right: 0;
-          margin-bottom: 6rem; } }
-    @media only screen and (max-width: 56.25em) {
-      .row [class^="col-"] {
-        width: 100% !important; } }
-  .row .col-1-of-2 {
-    width: calc((100% - 6rem) / 2); }
-  .row .col-1-of-3 {
-    width: calc((100% - 2 * 6rem) / 3); }
-  .row .col-1-of-4 {
-    width: calc((100% - 3 * 6rem) / 4); }
-  .row .col-2-of-3 {
-    width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem); }
-  .row .col-2-of-4 {
-    width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem); }
-  .row .col-3-of-4 {
-    width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }
+    margin-bottom: 6rem !important;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  .row {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+}
+.row::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.row [class^='col-'] {
+  float: left !important;
+}
+.row [class^='col-']:not(:last-child) {
+  margin-right: 6rem !important;
+}
+@media only screen and (max-width: 56.25em) {
+  .row [class^='col-']:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 6rem;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  .row [class^='col-'] {
+    width: 100% !important;
+  }
+}
+.row .col-1-of-2 {
+  width: calc((100% - 6rem) / 2);
+}
+.row .col-1-of-3 {
+  width: calc((100% - 2 * 6rem) / 3);
+}
+.row .col-1-of-4 {
+  width: calc((100% - 3 * 6rem) / 4);
+}
+.row .col-2-of-3 {
+  width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem);
+}
+.row .col-2-of-4 {
+  width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem);
+}
+.row .col-3-of-4 {
+  width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem);
+}
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+#header {
+  min-height: 8rem;
+}
+@media only screen and (max-width: 46.875em) {
+  #header {
+    min-height: 8rem !important;
+  }
+}
+@media only screen and (max-width: 31.25em) {
+  #header {
+    min-height: 5rem !important;
+  }
+}
+
+@media only screen and (max-width: 75em) {
+  .navbar_brand {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 75em) {
+  .navbar_brand_link {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 31.25em) {
+  .navbar_brand {
+    font-family: 'lobster';
+    font-size: '40px';
+    color: 'white';
+    font-style: 'none';
+    text-decoration: 'none';
+  }
+}
+
+@media only screen and (max-width: 31.25em) {
+  .navbar_brand_image {
+    width: 250px;
+    margin-top: -5px;
+  }
+}
+
+.sidebar_button {
+  display: none !important;
+}
+@media only screen and (max-width: 75em) {
+  .sidebar_button {
+    display: contents !important;
+    margin-left: 100rem !important;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .sidebar_button {
+    display: none !important;
+  }
+}
+
+.sidebar_button_2 {
+  display: none !important;
+}
+@media only screen and (max-width: 37.5em) {
+  .sidebar_button_2 {
+    display: contents !important;
+  }
+}
+
+@media only screen and (max-width: 75em) {
+  #responsive-navbar-nav {
+    display: none !important;
+  }
+}
+
+.side-bar-hidden {
+  display: none !important;
+}
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+#home-page {
+  width: 85% !important;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 53.125em) {
+  #home-page {
+    width: 95% !important;
+    margin-right: -2rem !important;
+  }
+}
+
+#cards {
+  width: 100% !important;
+}
+
+#card-ad {
+  width: 15% !important;
+}
+@media only screen and (max-width: 81.25em) {
+  #card-ad {
+    width: 30% !important;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  #card-ad {
+    width: 40% !important;
+  }
+}
+@media only screen and (max-width: 29.375em) {
+  #card-ad {
+    width: 90% !important;
+  }
+}
+
+#search-box {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: start;
+}
+@media only screen and (max-width: 68.75em) {
+  #search-box {
+    flex-direction: column;
+  }
+}
+
+.search-item {
+  margin-left: 2rem;
+}
+@media only screen and (max-width: 56.25em) {
+  .search-item {
+    width: 20rem !important;
+    margin-bottom: 0;
+  }
+}
+@media only screen and (max-width: 25em) {
+  .search-item {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 20rem !important;
+  }
+}
+
+.form-sign {
+  width: 40% !important;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 68.75em) {
+  .form-sign {
+    width: 50% !important;
+  }
+}
+@media only screen and (max-width: 50em) {
+  .form-sign {
+    width: 60% !important;
+  }
+}
+@media only screen and (max-width: 40em) {
+  .form-sign {
+    width: 70% !important;
+  }
+}
+@media only screen and (max-width: 34.375em) {
+  .form-sign {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 31.25em) {
+  .form-text-button {
+    font-size: 0.7rem !important;
+    padding-top: 0.3rem;
+  }
+}
+
+@media only screen and (max-width: 25em) {
+  #form-sign-in-button {
+    height: 40px !important;
+  }
+}
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.form-post {
+  width: 60% !important;
+  margin: 0 auto;
+}
+
+.ad-title {
+  width: 100% !important;
+}
+
+#search-box-post {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  margin-left: -1.2rem !important;
+}
+@media only screen and (max-width: 68.75em) {
+  #search-box-post {
+    flex-direction: column;
+  }
+}
+
+#location-box-post {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+}
+@media only screen and (max-width: 68.75em) {
+  #location-box-post {
+    flex-direction: column;
+  }
+}
+
+.city {
+  margin-left: 0.5rem;
+}
+
+@media only screen and (max-width: 68.75em) {
+  .post-select {
+    width: 60% !important;
+  }
+}
+
+.post-flex-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 75em) {
+  .post-flex-1 {
+    flex-direction: column;
+  }
+}
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.ad-details-box {
+  display: flex !important;
+  flex-direction: row !important;
+}
+@media only screen and (max-width: 68.75em) {
+  .ad-details-box {
+    flex-direction: column !important;
+    height: 52rem !important;
+  }
+}
+
+.full-box {
+  height: 40%;
+  width: 100%;
+}
+
+#image-list {
+  height: 400px !important;
+  width: 600px !important;
+}
+@media only screen and (max-width: 68.75em) {
+  #image-list {
+    width: 100% !important;
+  }
+}
+
+#ad-description {
+  height: 23rem !important;
+  overflow: scroll;
+}
+
+/*
+$Breakpoint argument choices
+Phone -- 0 - 600 px 
+tab-port -- 600 - 900 px for tablet portrait 
+tab-land -- 900 - 1200 px for tab landscape 
+[1200 - 1800 ] -- is for desktop we are using and we have made the website with 
+big-desktop -- 1800px + 
+*/
+.form-update {
+  width: 60% !important;
+  margin: 0 auto !important;
+}

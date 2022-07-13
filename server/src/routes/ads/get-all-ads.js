@@ -16,6 +16,7 @@ require('dotenv').config(); //? to use dotenv file
 router.get('/api/ads/get-all-ads', async (req, res) => {
   const ads = await Ad.find();
 
+  console.log(ads);
   res.status(201).send(ads);
 });
 

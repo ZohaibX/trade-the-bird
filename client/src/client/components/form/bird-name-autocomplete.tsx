@@ -15,6 +15,7 @@ export default function BirdNameSelect({ label, value, setValue }) {
   return (
     <div>
       <Autocomplete
+        className="search-item post-select"
         style={{ marginTop: '6px' }}
         options={birdOptions}
         id="disable-close-on-select"

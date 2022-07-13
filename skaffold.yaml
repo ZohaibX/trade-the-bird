@@ -31,4 +31,4 @@ build:
 
           - src: '**/*.tsx'
             dest: . # for putting the changes in the container
-    
+

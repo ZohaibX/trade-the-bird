@@ -51,7 +51,7 @@ const SignIn = () => {
       <h2 className="text-center my-5" style={{ fontFamily: 'Alfa Slab One' }}>
         Sign In Sir.
       </h2>
-      <Form onSubmit={submit} style={{ width: '40%', margin: '0 auto' }}>
+      <Form onSubmit={submit} className="form-sign">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control
             type="email"
@@ -75,6 +75,8 @@ const SignIn = () => {
         <div className="d-grid gap-2">
           <Button
             type="submit"
+            className="form-text-button"
+            id="form-sign-in-button"
             style={{
               backgroundColor: '#191970',
               color: 'white',
@@ -107,7 +109,7 @@ const SignIn = () => {
         <div className="d-flex flex-row justify-content-between">
           {/* Replace */}
           <a
-            href={`${keys.BACKEND}/auth/google`}
+            href={`${keys.BACKEND}/api/auth/google`}
             className="google-icon d-flex flex-row"
             style={{
               width: '48%',
@@ -124,6 +126,7 @@ const SignIn = () => {
               alt=""
             />
             <h6
+              className="form-text-button"
               style={{
                 marginLeft: '10px',
                 marginTop: '11px',
@@ -131,13 +134,13 @@ const SignIn = () => {
                 color: 'white',
               }}
             >
-              Google SignUp
+              Google SignIn
             </h6>
           </a>
 
           {/* // Replace  */}
           <a
-            href={`${keys.BACKEND}/auth/facebook`}
+            href={`${keys.BACKEND}/api/auth/facebook`}
             className="facebook-icon d-flex flex-row"
             style={{
               width: '50%',
@@ -153,6 +156,7 @@ const SignIn = () => {
               alt=""
             />
             <h6
+              className="form-text-button"
               style={{
                 marginLeft: '10px',
                 marginTop: '11px',
@@ -160,7 +164,7 @@ const SignIn = () => {
                 color: 'white',
               }}
             >
-              Facebook SignUp
+              Facebook SignIn
             </h6>
           </a>
         </div>

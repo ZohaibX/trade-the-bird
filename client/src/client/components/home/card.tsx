@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Link } from 'react-router-dom';
+import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 
 export default function MediaCard({
   imageLink,
@@ -19,10 +20,11 @@ export default function MediaCard({
   link,
 }) {
   return (
-    <Card style={{ width: '18%' }}>
+    <Card id="card-ad" style={{ width: '18%' }}>
       <Link to={link} style={{ textDecoration: 'none' }}>
         <CardActionArea>
           <CardMedia component="img" height="140" image={imageLink} alt={alt} />
+
           <CardContent>
             <Typography
               gutterBottom

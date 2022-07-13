@@ -6,15 +6,14 @@ const userSchema = new mongoose.Schema(
     username: String,
     email: String,
     role: {
-      type: String, 
-      default: "User"
-    }, 
+      type: String,
+      default: 'User',
+    },
     password: String,
     blocked: {
-      type: Boolean ,
-      default: false
+      type: Boolean,
+      default: false,
     },
-    picture: String,
   },
   // changing the returns
   {
@@ -49,4 +48,4 @@ userSchema.statics.build = (attrs) => {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports.User  = User
+module.exports.User = User;

@@ -1,0 +1,78 @@
+@import '../abstract/mixins';
+
+#home-page {
+  width: 85% !important;
+  margin: 0 auto;
+
+  @include respond(850) {
+    width: 95% !important;
+    margin-right: -2rem !important;
+  }
+}
+#cards {
+  width: 100% !important;
+}
+#card-ad {
+  width: 15% !important;
+  @include respond(1300) {
+    width: 30% !important;
+  }
+  @include respond(tab-port) {
+    width: 40% !important;
+  }
+  @include respond(470) {
+    width: 90% !important;
+  }
+}
+
+#search-box {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: start;
+
+  @include respond(1100) {
+    flex-direction: column;
+  }
+}
+.search-item {
+  margin-left: 2rem;
+  @include respond(tab-port) {
+    width: 20rem !important;
+    margin-bottom: 0;
+  }
+  @include respond(phone-small) {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 20rem !important;
+  }
+}
+
+.form-sign {
+  width: 40% !important;
+  margin: 0 auto;
+  @include respond(1100) {
+    width: 50% !important;
+  }
+  @include respond(800) {
+    width: 60% !important;
+  }
+  @include respond(640) {
+    width: 70% !important;
+  }
+  @include respond(550) {
+    width: 80% !important;
+  }
+}
+
+.form-text-button {
+  @include respond(phone-md) {
+    font-size: 0.7rem !important;
+    padding-top: 0.3rem;
+  }
+}
+
+#form-sign-in-button {
+  @include respond(phone-small) {
+    height: 40px !important;
+  }
+}

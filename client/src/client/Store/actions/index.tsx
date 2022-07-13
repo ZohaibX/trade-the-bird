@@ -15,11 +15,14 @@
 //   }
 // };
 
+import axios from 'axios';
+import { keys } from '../../../config/keys';
+
 export const FETCH_CURRENT_USER = 'FETCH_CURRENT_USER';
 //? async requests - way
 export const fetchCurrentUser = () => async (dispatch, getState, api) => {
   //? api: axiosInstance , we sent this in the store . details are there
-  const {data} = await api.get('/users/currentUser');
+  const { data } = await axios.get(`${keys.BACKEND}/api/users/currentUser`);
   dispatch({ type: FETCH_CURRENT_USER, payload: data.currentUser });
 };
 
@@ -27,7 +30,7 @@ export const FETCH_ALL_ADS = 'FETCH_ALL_ADS';
 // ? async requests - way
 export const fetchAllAds = () => async (dispatch, getState, api) => {
   //? api: axiosInstance , we sent this in the store . details are there
-  const { data } = await api.get('/ads/get-all-ads');
+  const { data } = await axios.get(`${keys.BACKEND}/api/ads/get-all-ads`);
   dispatch({ type: FETCH_ALL_ADS, payload: data });
 };
 

@@ -1,0 +1,28 @@
+@import '../abstract/mixins';
+
+.ad-details-box {
+  display: flex !important;
+  flex-direction: row !important;
+  @include respond(1100) {
+    flex-direction: column !important;
+  }
+}
+
+.full-box {
+  height: 40%;
+  width: 100%;
+}
+
+#image-list {
+  height: 400px !important;
+  width: 600px !important;
+
+  @include respond(1100) {
+    width: 100% !important;
+  }
+}
+
+#ad-description {
+  height: 23rem !important;
+  overflow: scroll;
+}

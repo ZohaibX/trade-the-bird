@@ -1,58 +1,46 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { Nav, NavLink } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import { keys } from '../../../config/keys';
 import { Link } from 'react-router-dom';
-import { Navbar, Container, NavDropdown, Nav } from 'react-bootstrap';
-import img from '../images/logo-color.svg';
-import { keys } from '../../config/keys';
-import SideBar from './home/side-bar';
-import SideBar2 from './home/side-bar-2';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { connect } from 'react-redux';
 
-const Header = ({ currentUser }) => {
-  console.log(currentUser);
+function OffCanvasExample({ name, currentUser, ...props }) {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
-    <Navbar
-      collapseOnSelect
-      style={{ fontFamily: 'cursive', fontSize: '20px' }}
-      bg="dark"
-      className="header"
-      id="header"
-    >
-      <Container>
-        <Navbar.Brand className="navbar_brand">
-          <Link
-            to="/"
-            className="font-weight-bold my-5 navbar_brand_link"
-            style={{
-              fontFamily: 'lobster',
-              fontSize: '40px',
-              color: 'white',
-              fontStyle: 'none',
-              textDecoration: 'none',
-            }}
-          >
-            {/* REPLACES */}
-            <img
-              className="navbar_brand_image"
-              src={`${keys.ROUTE}/logo-color.svg`}
-              style={{ height: '100px', marginTop: '-5px' }}
-              alt=""
-            />
-          </Link>
-          <SideBar2 currentUser={currentUser} name="Work" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse>
-          <SideBar currentUser={currentUser} name="Work" />
-        </Navbar.Collapse>
-        <Navbar.Collapse className="navbar_side" id="responsive-navbar-nav">
-          <Nav className="me-auto"></Nav>
-          <Nav className="me-auto">
+    <>
+      <Button
+        variant="primary"
+        onClick={handleShow}
+        className="sidebar_button_2"
+      >
+        <ExpandMoreIcon />
+      </Button>
+      <Offcanvas
+        style={{ fontFamily: 'cursive', fontSize: '20px', height: '300px' }}
+        show={show}
+        onHide={handleClose}
+        {...props}
+      >
+        <Offcanvas.Body
+          style={{ fontFamily: 'cursive', fontSize: '20px' }}
+          className="bg-dark"
+        >
+          {/* <Nav className="me-auto"></Nav> */}
+          <Nav className="me-auto ">
             <Nav.Link
               as={Link}
               to="/post-ad"
-              className="mx-1"
+              className="mx-1 text-center"
               style={{
                 color: 'white',
+                fontFamily: 'cursive',
                 borderRadius: '10px',
                 boxShadow: '5px 5px black',
               }}
@@ -60,9 +48,10 @@ const Header = ({ currentUser }) => {
               Post Ad
             </Nav.Link>
             <Nav.Link
-              className="mx-1"
+              className="mx-1 text-center"
               style={{
                 color: 'white',
+                fontFamily: 'cursive',
                 borderRadius: '10px',
                 boxShadow: '5px 5px black',
               }}
@@ -70,9 +59,10 @@ const Header = ({ currentUser }) => {
               Pet Accessories
             </Nav.Link>
             <Nav.Link
-              className="mx-1"
+              className="mx-1 text-center"
               style={{
                 color: 'white',
+                fontFamily: 'cursive',
                 borderRadius: '10px',
                 boxShadow: '5px 5px black',
               }}
@@ -83,9 +73,10 @@ const Header = ({ currentUser }) => {
               <Nav.Link
                 as={Link}
                 to="/get-my-ads"
-                className="mx-1"
+                className="mx-1 text-center"
                 style={{
                   color: 'white',
+                  fontFamily: 'cursive',
                   borderRadius: '10px',
                   boxShadow: '5px 5px black',
                 }}
@@ -99,9 +90,10 @@ const Header = ({ currentUser }) => {
             <Nav>
               <Link
                 to="/register"
-                className="my-auto mx-2"
+                className="my-auto mx-2 text-center"
                 style={{
                   fontStyle: 'none',
+                  fontFamily: 'cursive',
                   borderRadius: '10px',
                   paddingLeft: '10px',
                   paddingRight: '10px',
@@ -116,9 +108,10 @@ const Header = ({ currentUser }) => {
               </Link>
               <Link
                 to="/sign-in"
-                className="my-auto mx-2"
+                className="my-auto mx-2 text-center"
                 style={{
                   fontStyle: 'none',
+                  fontFamily: 'cursive',
                   borderRadius: '10px',
                   paddingLeft: '10px',
                   paddingRight: '10px',
@@ -137,28 +130,12 @@ const Header = ({ currentUser }) => {
 
           {currentUser && (
             <Nav>
-              {/* <Link
-                to="/"
-                className="my-auto mx-2"
-                style={{
-                  fontStyle: 'none',
-                  borderRadius: '10px',
-                  paddingLeft: '10px',
-                  paddingRight: '10px',
-                  paddingTop: '10px',
-                  paddingBottom: '10px',
-                  boxShadow: '5px 5px black',
-                  color: 'white',
-                  textDecoration: 'none',
-                }}
-              >
-                {currentUser.username}
-              </Link> */}
               <a
                 href={`${keys.BACKEND}/api/users/signOut`}
-                className="my-auto mx-2"
+                className="my-auto mx-2 text-center"
                 style={{
                   fontStyle: 'none',
+                  fontFamily: 'cursive',
                   borderRadius: '10px',
                   paddingLeft: '10px',
                   paddingRight: '10px',
@@ -174,18 +151,29 @@ const Header = ({ currentUser }) => {
               </a>
             </Nav>
           )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
   );
-};
+}
 
-// function mapStateToProps({ currentUser }) {
-//   return { currentUser };
-// }
-// mapStateToProps have state object as an argument, we can fetch state[Data] like this as obvious
+function SideBar2({ currentUser }) {
+  return (
+    <>
+      {['top'].map((placement, idx) => (
+        <OffCanvasExample
+          key={idx}
+          placement={placement}
+          name={placement}
+          currentUser={currentUser}
+        />
+      ))}
+    </>
+  );
+}
 
-export default Header;
-// in App.tsx file, currentUserDetails are already fetched
-// and App.tsx file is directly connected to the every route we render --- notice --- only routes - pages
-// normal components (not pages) will be connected to App.tsx by using that components in that App.tsx
+function mapStateToProps({ currentUser }) {
+  return { currentUser };
+}
+
+export default connect(mapStateToProps)(SideBar2);

@@ -13,6 +13,7 @@ export default function Select({ label, value, setValue, birdName }) {
   return (
     <div>
       <Autocomplete
+        className="search-item post-select"
         style={{ marginTop: '6px' }}
         options={
           (birdName === 'Parrot' && parrotBreeds) ||
