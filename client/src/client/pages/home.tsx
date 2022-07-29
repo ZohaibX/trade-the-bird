@@ -43,8 +43,6 @@ const Home = (props) => {
   }
   if (!searchedBirds.length) searchedBirds = props.allAds;
 
-  console.log(searchedBirds);
-
   return (
     <div className="my-5" id="home-page">
       {head()}

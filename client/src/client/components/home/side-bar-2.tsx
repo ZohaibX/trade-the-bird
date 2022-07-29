@@ -59,6 +59,8 @@ function OffCanvasExample({ name, currentUser, ...props }) {
               Pet Accessories
             </Nav.Link>
             <Nav.Link
+              as={Link}
+              to="/query-hub"
               className="mx-1 text-center"
               style={{
                 color: 'white',
@@ -67,7 +69,7 @@ function OffCanvasExample({ name, currentUser, ...props }) {
                 boxShadow: '5px 5px black',
               }}
             >
-              Query Section
+              Query Hub
             </Nav.Link>
             {currentUser && currentUser.role !== 'Admin' ? (
               <Nav.Link
@@ -81,7 +83,7 @@ function OffCanvasExample({ name, currentUser, ...props }) {
                   boxShadow: '5px 5px black',
                 }}
               >
-                My Ads
+                Your Uploads
               </Nav.Link>
             ) : null}
           </Nav>

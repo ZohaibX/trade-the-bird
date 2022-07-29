@@ -91,7 +91,16 @@ function PostAd() {
   return (
     <div className="" style={{ width: '100%', margin: '0 auto' }}>
       {head()}
-      <h2 className="text-center my-5" style={{ fontFamily: 'Alfa Slab One' }}>
+      <h2
+        className="text-center my-5"
+        style={{
+          fontFamily: 'Alfa Slab One',
+          borderBottom: '2px solid black',
+          paddingBottom: '2px',
+          width: '400px',
+          margin: '0 auto',
+        }}
+      >
         Upload an Ad Sir.
       </h2>
 

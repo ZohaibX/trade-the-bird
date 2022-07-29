@@ -70,6 +70,8 @@ const Header = ({ currentUser }) => {
               Pet Accessories
             </Nav.Link>
             <Nav.Link
+              as={Link}
+              to="/query-hub"
               className="mx-1"
               style={{
                 color: 'white',
@@ -77,7 +79,7 @@ const Header = ({ currentUser }) => {
                 boxShadow: '5px 5px black',
               }}
             >
-              Query Section
+              Query Hub
             </Nav.Link>
             {currentUser && currentUser.role !== 'Admin' ? (
               <Nav.Link
@@ -90,7 +92,7 @@ const Header = ({ currentUser }) => {
                   boxShadow: '5px 5px black',
                 }}
               >
-                My Ads
+                Your Uploads
               </Nav.Link>
             ) : null}
           </Nav>

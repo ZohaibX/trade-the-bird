@@ -14,6 +14,8 @@ import AdDetails from '../pages/ads/ad-details';
 import UpdateAd from '../pages/ads/update-ad';
 import myAds from '../pages/ads/my-ads';
 import profile from '../pages/profile';
+import comments from '../pages/comment/comments';
+import addQuery from '../pages/comment/add-query';
 
 export default [
   {
@@ -28,6 +30,8 @@ export default [
       { path: `/ad-details-:id-:userId-details-x`, ...AdDetails },
       { path: `/update-ad-details-:id-details-x`, ...UpdateAd },
       { path: `/get-my-ads`, ...myAds },
+      { path: `/query-hub`, ...comments },
+      { path: `/add-your-query`, ...addQuery },
 
       // Replace -- add current user id in params
       { path: '/post-ad', ...PostAd },

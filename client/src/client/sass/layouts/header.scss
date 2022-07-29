@@ -1,13 +1,13 @@
 @import '../abstract/mixins';
 
 #header {
-  min-height: 8rem;
+  height: 6rem !important;
 
   @include respond(750) {
-    min-height: 8rem !important;
+    height: 6rem !important;
   }
   @include respond(phone-md) {
-    min-height: 5rem !important;
+    height: 5rem !important;
   }
 }
 
@@ -31,9 +31,10 @@
   }
 
   &_image {
+    margin-top: -5px !important;
     @include respond(phone-md) {
       width: 250px;
-      margin-top: -5px;
+      margin-top: 5px !important;
     }
   }
 }

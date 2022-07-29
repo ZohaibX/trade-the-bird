@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session');
 const { currentUser } = require('@zbtickets/common');
 const AuthRoutes = require('../routes/auth/service');
 const AdRoutes = require('../routes/ads/service');
+const CommentRoutes = require('../routes/comments/service');
 const passport = require('passport');
 
 // middlewares
@@ -38,15 +39,13 @@ module.exports = function (app) {
 
   AuthRoutes(app);
   AdRoutes(app);
+  CommentRoutes(app);
 
   // Cors for axios
   require('../cors/cors')(app);
 
   // // GQL
   // require("../graphql/service/service")(app);
-
-  // // Multer
-  // require("../upload-by-multer/service")(app);
 
   // // Redis
   // require("../services/cache");
